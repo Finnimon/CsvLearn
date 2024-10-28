@@ -1,0 +1,16 @@
+1.	Read RFC4180.txt carefully.
+2.	Implement the interface Csv.IReader.
+3.	Make sure that all methods in Csv.Factory are implemented.
+4.	Run the tests.
+5.	Debug and optimize.
+6.	Be proud of yourself!
+
+The following step is optional.
+7.	If you're in the mood for pain and despair try yourself at creating a Csv.AsyncReader.
+		This bad should satisfy the following conditions:
+		-	Read the entire file.
+		-	Have a IsAsyncReadDone Property.
+		-	Get the number of cores from the environment variables.
+		-	Start a new thread parsing a chunk of the File for each available core.
+		-	Cry.
+8.	Be proud of yourself!
