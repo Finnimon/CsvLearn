@@ -1,18 +1,25 @@
-﻿namespace CsvTests;
+﻿using System.Diagnostics;
+using System.Globalization;
+using Csv;
+
+namespace CsvTests;
 
 [TestClass]
-internal class Header
+public class Header
 {
     [TestMethod]
-    public static void HeaderLessExceptions()
+    public void Queries()
     {
-        throw new NotImplementedException();
+        var (file, format) = new TestDir().WithHeader;
+        var reader = Factory.CreateReader(file, format);
+        reader.ReadCompletely();
 
-    }
+        var csvHelperReader = new CsvHelper.CsvReader(file.OpenText(), CultureInfo.CurrentCulture, false);
+        csvHelperReader.ReadHeader();
 
-    public static void Queries()
-    {
-        throw new NotImplementedException();
+        Assert.AreEqual(csvHelperReader.ColumnCount, reader.ColumnCount);
+
+        for (var i = 0; i < csvHelperReader.HeaderRecord.Length; i++) Assert.AreEqual(csvHelperReader.HeaderRecord[i], reader.Header[i]);
 
     }
 

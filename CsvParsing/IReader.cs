@@ -11,30 +11,37 @@ public interface IReader : IEnumerable<string[]>, IDisposable
     /// <summary>
     /// The delimiter separating values.
     /// </summary>
-    public string Separator { get; protected set; }
+    public string Separator { get; }
 
     /// <summary>
     /// The delimiter string for new lines.
     /// </summary>
-    public string NewLine { get; protected set; }
+    public string NewLine { get; }
 
     /// <summary>
     /// The File location of the Csv.
     /// </summary>
-    public FileInfo File { get; protected set; }
+    public FileInfo File { get; }
+
+    public int ColumnCount { get; }
 
     /// <summary>
     /// Whether the Csv has a header.
     /// </summary>
-    public bool HasHeader { get; protected set; }
+    public bool HasHeader { get; }
 
     /// <summary>
     /// CsvHeader or null if there is none.
     /// </summary>
-    public string[]? Header { get; protected set; }
+    public string[]? Header { get; }
     #endregion
 
     #region Methods
+
+    /// <summary>
+    /// Reads the entire file at once and closes all FileStreams associated with this Reader.
+    /// </summary>
+    public void ReadCompletely();
 
     /// <summary>
     /// Read the column denominated by <paramref name="columnName"/>.
