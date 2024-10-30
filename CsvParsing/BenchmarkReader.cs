@@ -13,6 +13,22 @@ internal class BenchmarkReader : IReader
 {
     #region Properties
 
+    private bool Disposed { get; set; }
+    public char RegexEscape { get; }
+    public char Separator { get; }
+    public string LineBreak { get; }
+    public TextReader StringInput { get; }
+    public int ColumnCount { get; }
+    public bool HasHeader { get; }
+    public string[]? Header { get; }
+    private char[] RegexChars { get; }
+
+
+    #endregion
+
+    #region Construction
+
+    
     public BenchmarkReader(TextReader stringInput, Format format = new Format())
     {
         StringInput = stringInput;
@@ -38,17 +54,6 @@ internal class BenchmarkReader : IReader
         ColumnCount = !hasHeader ? -1 : Header!.Length;
         RegexChars = [regexEscape, separator];
     }
-
-    private bool Disposed { get; set; }
-    public char RegexEscape { get; }
-    public char Separator { get; }
-    public string LineBreak { get; }
-    public TextReader StringInput { get; }
-    public int ColumnCount { get; }
-    public bool HasHeader { get; }
-    public string[]? Header { get; }
-    private char[] RegexChars { get; }
-
 
     #endregion
 
