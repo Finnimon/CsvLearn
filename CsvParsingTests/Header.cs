@@ -12,15 +12,18 @@ public class Header
     {
         var (file, format) = new TestDir().WithHeader;
         var reader = Factory.CreateReader(file, format);
-        reader.ReadCompletely();
+        var columns = reader.ReadColumns();
 
-        var csvHelperReader = new CsvHelper.CsvReader(file.OpenText(), CultureInfo.CurrentCulture, false);
-        csvHelperReader.ReadHeader();
+        var benchy = Factory.CreateBenchmarkReader(file, format);
+        var benchyColumns= benchy.ReadColumns();
 
-        Assert.AreEqual(csvHelperReader.ColumnCount, reader.ColumnCount);
+        foreach (var key in benchyColumns.Keys)
+        {
+            var column = columns[key];
+            var benchyColumn = benchyColumns[key];
 
-        for (var i = 0; i < csvHelperReader.HeaderRecord.Length; i++) Assert.AreEqual(csvHelperReader.HeaderRecord[i], reader.Header[i]);
-
+            for (var i = 0; i < benchyColumn.Count; i++) Assert.AreEqual(column[i], benchyColumn[i]);
+        }
     }
 
 }

@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 
 namespace Csv;
 
-public struct Format
+public readonly struct Format
 {
-    public Format(bool hasHeader=false, string separator=",", string newLine="\r\n")
+    public Format(bool hasHeader = false, char separator = ',', string lineBreak = "\r\n", char regexEscape = '"')
     {
-        HasHeader = hasHeader;
+        RegexEscape = regexEscape;
         Separator = separator;
-        NewLine = newLine;
+        LineBreak = lineBreak;
+        HasHeader = hasHeader;
     }
 
-    public string Separator { get; }
-    public string NewLine { get; }
+    public char RegexEscape { get; }
+    public char Separator { get; }
+    public string LineBreak { get; }
     public bool HasHeader { get; }
 }

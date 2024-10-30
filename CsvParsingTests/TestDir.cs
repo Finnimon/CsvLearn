@@ -1,4 +1,6 @@
-﻿namespace CsvTests;
+﻿using Csv;
+
+namespace CsvTests;
 
 internal class TestDir
 {
@@ -15,10 +17,13 @@ internal class TestDir
 
     public TestDir()
     {
-        WithHeader = (new("TestData\\WithHeader.csv"),new Csv.Format());
-        WithOutHeader = (new("TestData\\WithOutHeader.csv"), new Csv.Format(false));
-        BigWithHeader = (new("TestData\\BigWithHeader.csv"), new Csv.Format());
-        BigWithoutHeader = (new("TestData\\BigWithoutHeader.csv"), new Csv.Format(false)); 
+        Csv.Format headerFormat=new(hasHeader:true);
+        var headerLessFormat = new Csv.Format(hasHeader:false);
+
+        WithHeader = (new("TestData\\WithHeader.csv"),headerFormat);
+        WithOutHeader = (new("TestData\\WithOutHeader.csv"), headerLessFormat);
+        BigWithHeader = (new("TestData\\BigWithHeader.csv"), headerFormat);
+        BigWithoutHeader = (new("TestData\\BigWithoutHeader.csv"), headerLessFormat); 
     }
 
     #endregion

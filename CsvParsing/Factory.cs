@@ -16,8 +16,8 @@ public static class Factory
     /// <exception cref="FormatException">
     /// Thrown when <paramref name="file"/> is not formatted correctly.
     /// </exception>
-    public static IReader CreateReader(FileInfo file, bool hasHeader=false, string separator=",", string newLine = "\r\n") => throw new NotImplementedException();
-   
+    public static IReader CreateReader(FileInfo file, bool hasHeader = false, char separator = ',', string newLine = "\r\n", char regexEscape = '"') => throw new NotImplementedException();
+
     /// <summary>
     /// Creates a <see cref="IReader"/> with the given Arguments.
     /// </summary>
@@ -30,5 +30,9 @@ public static class Factory
     /// <exception cref="FormatException">
     /// Thrown when <paramref name="file"/> is not formatted correctly.
     /// </exception>
-    public static IReader CreateReader(FileInfo file, Format format=new Format())=>throw new NotImplementedException();
+    public static IReader CreateReader(FileInfo file, Format format = new Format()) =>
+        throw new NotImplementedException();
+
+    public static IReader CreateBenchmarkReader(FileInfo file, Format format = new Format())=>
+        new BenchmarkReader(file.OpenText(), format);
 }

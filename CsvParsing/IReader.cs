@@ -11,17 +11,17 @@ public interface IReader : IEnumerable<string[]>, IDisposable
     /// <summary>
     /// The delimiter separating values.
     /// </summary>
-    public string Separator { get; }
+    public char Separator { get; }
 
     /// <summary>
     /// The delimiter string for new lines.
     /// </summary>
-    public string NewLine { get; }
+    public string LineBreak { get; }
 
     /// <summary>
     /// The File location of the Csv.
     /// </summary>
-    public FileInfo File { get; }
+    protected TextReader StringInput { get; }
 
     public int ColumnCount { get; }
 
@@ -38,10 +38,6 @@ public interface IReader : IEnumerable<string[]>, IDisposable
 
     #region Methods
 
-    /// <summary>
-    /// Reads the entire file at once and closes all FileStreams associated with this Reader.
-    /// </summary>
-    public void ReadCompletely();
 
     /// <summary>
     /// Read the column denominated by <paramref name="columnName"/>.
@@ -64,7 +60,7 @@ public interface IReader : IEnumerable<string[]>, IDisposable
     /// <exception cref="ArgumentOutOfRangeException">
     /// Thrown when any of the <paramref name="columnNames"/> do not exist.
     /// </exception>
-    public Dictionary<string, IEnumerable<string>> ReadColumns(IEnumerable<string> columnNames);
+    public Dictionary<string, List<string>> ReadColumns(IEnumerable<string> columnNames);
 
     /// <summary>
     /// Read All Columns in the File.
@@ -72,7 +68,7 @@ public interface IReader : IEnumerable<string[]>, IDisposable
     /// <exception cref="NotSupportedException">
     /// Thrown when <see cref="HasHeader"/><code>=false</code>.
     /// </exception>
-    public Dictionary<string, IEnumerable<string>> ReadColumns();
+    public Dictionary<string, List<string>> ReadColumns();
 
 
     #endregion
