@@ -1,15 +1,10 @@
-﻿using System.Diagnostics;
-using System.Globalization;
-using System.Net.Mime;
-using Csv;
+﻿using Csv;
 
 namespace CsvTests;
 
 [TestClass]
 public class Completeness
 {
-
-
 
     [TestMethod]
     public void WithHeader()
@@ -22,7 +17,8 @@ public class Completeness
         var benchyRecords = benchy.ToList();
 
         for (var i = 0; i < readerRecords.Count; i++)
-            for (var j = 0; j < reader.ColumnCount; j++) Assert.AreEqual(benchyRecords[i][j], readerRecords[i][j]);
+            for (var j = 0; j < reader.ColumnCount; j++)
+                Assert.AreEqual(benchyRecords[i][j], readerRecords[i][j]);
     }
 
     [TestMethod]
@@ -36,6 +32,7 @@ public class Completeness
         var benchyRecords = benchy.ToList();
 
         for (var i = 0; i < readerRecords.Count; i++)
-        for (var j = 0; j < reader.ColumnCount; j++) Assert.AreEqual(benchyRecords[i][j], readerRecords[i][j]);
+            for (var j = 0; j < reader.ColumnCount; j++)
+                Assert.AreEqual(benchyRecords[i][j], readerRecords[i][j]);
     }
 }

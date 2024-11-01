@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Globalization;
-using Csv;
+﻿using Csv;
 
 namespace CsvTests;
 
@@ -15,7 +13,7 @@ public class Header
         var columns = reader.ReadColumns();
 
         var benchy = Factory.CreateBenchmarkReader(file, format);
-        var benchyColumns= benchy.ReadColumns();
+        var benchyColumns = benchy.ReadColumns();
 
         foreach (var key in benchyColumns.Keys)
         {
@@ -25,5 +23,4 @@ public class Header
             for (var i = 0; i < benchyColumn.Count; i++) Assert.AreEqual(column[i], benchyColumn[i]);
         }
     }
-
 }
